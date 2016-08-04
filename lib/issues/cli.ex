@@ -48,6 +48,13 @@ defmodule Issues.CLI do
     Issues.GithubIssues.fetch(user, project)
     |> decode_response
     |> convert_to_list_of_maps
+    |> sort_into_ascending_order
+    |> Enum.take(count)
+  end
+
+  def sort_into_ascending_order(list_of_issues) do
+    Enum.sort list_of_issues,
+      fn i1, i2 -> i1["created_at"] <= i2["created_at"] end
   end
 
   def decode_response({:ok, body}), do: body
