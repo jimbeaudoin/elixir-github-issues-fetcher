@@ -1,4 +1,5 @@
 defmodule Issues.CLI do
+  import Issues.TableFormatter, only: [print_table_for_columns: 2]
 
   @default_count 4
 
@@ -15,7 +16,7 @@ defmodule Issues.CLI do
   end
 
   @doc """
-  'argv' can be -h or --help, whixh returns :help.
+  'argv' can be -h or --help, which returns :help.
 
   Otherwise it is a github user name, project name, and (optionally)
   the number of entries to format.
@@ -44,12 +45,13 @@ defmodule Issues.CLI do
     System.halt(0)
   end
 
-  def process({user, project, _count}) do
+  def process({user, project, count}) do
     Issues.GithubIssues.fetch(user, project)
     |> decode_response
     |> convert_to_list_of_maps
     |> sort_into_ascending_order
     |> Enum.take(count)
+    |> print_table_for_columns(["number", "created_at", "title"])
   end
 
   def sort_into_ascending_order(list_of_issues) do
