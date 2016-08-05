@@ -3,7 +3,7 @@
 Command Line Github Issue Fetcher written in Elixir
 
 ## Prerequisites
-- Elrang 19
+- Erlang 19
 - Elixir 1.3
 
 ## Usage
