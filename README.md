@@ -8,7 +8,7 @@ Command Line Github Issue Fetcher written in Elixir
 
 ## Usage
 ```
-./issues <user> <project> [count | #{@default_count}]
+./issues <user> <project> [count]
 ```
 
 ## Rebuild
